@@ -109,6 +109,7 @@
             btnEditar.TabIndex = 7;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnConsultar
             // 
@@ -138,6 +139,7 @@
             btnExcluir.TabIndex = 10;
             btnExcluir.Text = "Excluir";
             btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += btnExcluir_Click;
             // 
             // dgvDados
             // 

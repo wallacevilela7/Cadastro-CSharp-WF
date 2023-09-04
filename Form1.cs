@@ -104,8 +104,64 @@ namespace Crud1
                 while (reader.Read())
                 {
                     txtName.Text = (string)reader["nome"];
-                    txtNum.Text = Convert.ToString(reader["numero"]); 
+                    txtNum.Text = Convert.ToString(reader["numero"]);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+                connection = null;
+                command = null;
+            }
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                connection = new SqlConnection(@"Server=localhost\SQLEXPRESS02;Database=Cliente;Trusted_Connection=True;TrustServerCertificate=true");
+
+                strSql = "UPDATE CAD_CLIENTE SET NOME = @NOME, NUMERO = @NUMERO WHERE ID = @ID";
+
+                command = new SqlCommand(strSql, connection);
+
+                command.Parameters.AddWithValue("@ID", txtId.Text);
+                command.Parameters.AddWithValue("@NOME", txtName.Text);
+                command.Parameters.AddWithValue("@NUMERO", txtNum.Text);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+                connection = null;
+                command = null;
+            }
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                connection = new SqlConnection(@"Server=localhost\SQLEXPRESS02;Database=Cliente;Trusted_Connection=True;TrustServerCertificate=true");
+
+                strSql = "DELETE CAD_CLIENTE WHERE ID = @ID";
+
+                command = new SqlCommand(strSql, connection);
+
+                command.Parameters.AddWithValue("@ID", txtId.Text);
+
+                connection.Open();
+                command.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
